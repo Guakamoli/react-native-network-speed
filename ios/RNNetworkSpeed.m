@@ -1,5 +1,6 @@
 
 #import "RNNetworkSpeed.h"
+#import <React/RCTBridge.h>
 #import "./NSObject+CheckNetWorkBytes.h"
 @implementation RNNetworkSpeed {
     NSTimer *timer;
@@ -33,7 +34,11 @@ RCT_EXPORT_METHOD(stopListenNetworkSpeed) {
         timer = nil;
     }
 }
-
+RCT_EXPORT_METHOD(getNetworkSpeed:(RCTPromiseResolveBlock)resolve
+    rejecter:(RCTPromiseRejectBlock)reject) {
+    NSDictionary *netWorkSpeed = [NSObject getNetworkSpeed]; //获取当前秒流量
+    resolve(netWorkSpeed);
+}
 #pragma mark - 实例方法
 
 - (void)getNetworkTraffic {

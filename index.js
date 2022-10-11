@@ -8,6 +8,7 @@ let defualtCallback = null
 let eventEmitter = null
 
 class NetworkSpeed {
+    static t = null
     static startListenNetworkSpeed(callback) {
             // 判断是否已经有监听
             if(!callback || typeof callback !== 'function') {throw new Error("callback need a function")}
@@ -31,6 +32,17 @@ class NetworkSpeed {
             defualtCallback = null
             eventEmitter = null
         }
+    }
+    static startListenNetworkSpeed2 (interval, callback) {
+        NetworkSpeed.stopListenNetworkSpeed2()
+        NetworkSpeed.t = setInterval(async () => {
+        const res = await RNNetworkSpeed.getNetworkSpeed()
+        callback?.(res)
+        }, interval);
+    }
+    static stopListenNetworkSpeed2() {
+        clearInterval(NetworkSpeed.t)
+        
     }
 }
 

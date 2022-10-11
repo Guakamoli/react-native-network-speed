@@ -18,6 +18,9 @@ declare class NetworkSpeed {
      * stop slistening
      */
     static stopListenNetworkSpeed(): void;
+    
+    static startListenNetworkSpeed2(time:number, callback: (result: result) => void): void;
+    static stopListenNetworkSpeed2(): void;
 }
 
 export default NetworkSpeed;
